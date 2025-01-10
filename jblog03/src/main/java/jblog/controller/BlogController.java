@@ -1,8 +1,8 @@
-package jblog03.controller;
+package jblog.controller;
 
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class MainController {
+public class BlogController {
 
 }

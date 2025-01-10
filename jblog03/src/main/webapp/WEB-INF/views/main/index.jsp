@@ -12,16 +12,7 @@
 <body>
 	<div class="center-content">
 		<h1 class="logo">JBlog</h1>
-		<ul class="menu">
-			<c:if test="${empty authUser}">
-				<li><a href="">로그인</a></li>
-				<li><a href="">회원가입</a></li>
-			</c:if>
-			<c:if test="${not empty authUser}">
-				<li><a href="">로그아웃</a></li>
-				<li><a href="">내블로그</a></li>
-			</c:if>
-		</ul>
+		<c:import url="/WEB-INF/views/includes/menu.jsp"/>
 		<form class="search-form">
 			<fieldset>
 				<input type="text" name="keyword" />
