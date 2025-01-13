@@ -19,7 +19,11 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/auth"/>
-			<bean class="mysite.security.LoginInterceptor"/>
+			<bean class="jblog.interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout"/>
+			<bean class="jblog.interceptor.LogoutInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	

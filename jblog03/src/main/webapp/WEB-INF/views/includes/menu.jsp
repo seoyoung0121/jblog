@@ -5,12 +5,12 @@
 <div id="menu">
 	<ul class="menu">
 		<c:if test="${empty authUser}">
-			<li><a href="">로그인</a></li>
-			<li><a href="">회원가입</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/login">로그인</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/join">회원가입</a></li>
 		</c:if>
 		<c:if test="${not empty authUser}">
-			<li><a href="">로그아웃</a></li>
-			<li><a href="">내블로그</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
+			<li><a href="${pageContext.request.contextPath}/jblog/${authUser.id}">내블로그</a></li>
 		</c:if>
 	</ul>
 </div>
