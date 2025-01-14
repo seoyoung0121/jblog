@@ -18,8 +18,11 @@ public class BlogRepository {
 	}
 
 	public BlogVo getBlogById(String id) {
-		System.out.println(id);
 		return sqlSession.selectOne("blog.findById", id);
+	}
+
+	public void updateBlog(BlogVo blogVo) {
+		sqlSession.update("blog.updateBlog", blogVo);
 	}
 	
 }

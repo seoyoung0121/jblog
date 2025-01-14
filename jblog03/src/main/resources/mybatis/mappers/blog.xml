@@ -13,4 +13,9 @@
 			select blog_id as blogId, title, profile from blog where blog_id=#{id}
 		]]>
 	</select>
+	<update id="updateBlog" parameterType="blogvo">
+		<![CDATA[
+			update blog set title=#{title}, profile=#{profile} where blog_id=#{blogId}
+		]]>
+	</update>
 </mapper>

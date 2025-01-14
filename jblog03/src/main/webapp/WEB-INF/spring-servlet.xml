@@ -15,6 +15,12 @@
 	<!-- DefaultServlet Handler -->
 	<mvc:default-servlet-handler/>
 	
+	<!-- mvc url-resource mapping -->
+	<mvc:resources mapping="/assets/upload-images/**" location="file:/Users/apple/mysite-uploads"/>
+	
+	<!-- MultipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+	
 	<!-- Interceptors -->
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -24,6 +30,13 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/user/logout"/>
 			<bean class="jblog.interceptor.LogoutInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/user/auth"/>
+			<mvc:exclude-mapping path="/user/logout"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<bean class="jblog.security.AuthInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	

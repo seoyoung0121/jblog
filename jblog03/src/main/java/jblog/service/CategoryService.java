@@ -22,4 +22,14 @@ public class CategoryService {
 	public List<CategoryVo> getCategoryByBlogId(String id) {
 		return categoryRepository.findByBlogId(id);
 	}
+
+	public CategoryVo getCategoryById(String blogId, Long categoryId) {
+		if(categoryId==0L) {
+			categoryId=categoryRepository.findDefaultId(blogId);
+			if(categoryId==null){
+				return null;
+			}
+		}
+		return categoryRepository.findById(categoryId);
+	}
 }

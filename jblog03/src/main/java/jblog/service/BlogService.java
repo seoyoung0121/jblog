@@ -20,4 +20,8 @@ public class BlogService {
 	public BlogVo getBlogById(String id) {
 		return blogRepository.getBlogById(id);
 	}
+
+	public void updateBlog(BlogVo blogVo) {
+		blogRepository.updateBlog(blogVo);
+	}
 }

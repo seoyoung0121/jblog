@@ -22,4 +22,12 @@ public class CategoryRepository {
 	public List<CategoryVo> findByBlogId(String id) {
 		return sqlSession.selectList("category.findByBlogId", id);
 	}
+
+	public Long findDefaultId(String blogId) {
+		return sqlSession.selectOne("category.findDefaultIdByBlogId", blogId);
+	}
+
+	public CategoryVo findById(Long categoryId) {
+		return sqlSession.selectOne("category.findById", categoryId);
+	}
 }

@@ -4,7 +4,7 @@
 <mapper namespace="category">
 	<insert id="initialInsert" parameterType="string">
 		<![CDATA[
-		insert into category values(null, "기본 카테고리", "기본 설명", #{id})
+		insert into category values(null, "미분류", "기본 설명", #{id})
 		]]>
 	</insert>
 	
@@ -17,6 +17,20 @@
 	<select id="findByBlogId" parameterType="string" resultType="categoryvo">
 		<![CDATA[
 			select id, name, description, blog_id as blogId from category where blog_id = #{id}
+		]]>
+	</select>
+	
+	<select id="findDefaultIdByBlogId" parameterType="string" resultType="long">
+		<![CDATA[
+			select id from category where blog_id = #{id}
+			order by id desc
+			limit 1
+		]]>
+	</select>
+	
+	<select id="findById" parameterType="long" resultType="categoryvo">
+		<![CDATA[
+			select id, name, description, blog_id as blogId from category where id = #{categoryId}
 		]]>
 	</select>
 </mapper>
