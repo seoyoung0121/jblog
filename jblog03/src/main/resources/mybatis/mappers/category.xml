@@ -10,13 +10,18 @@
 	
 	<insert id="insert" parameterType="categoryvo">
 		<![CDATA[
-		insert into category values(null, "제목", "프로필", #{id})
+		insert into category values(null, #{name}, #{description}, #{blogId})
 		]]>
 	</insert>
 	
 	<select id="findByBlogId" parameterType="string" resultType="categoryvo">
 		<![CDATA[
-			select id, name, description, blog_id as blogId from category where blog_id = #{id}
+			select c.id, c.name, c.description, c.blog_id as blogId, p.postNum
+			from category as c left join (select category_id, count(*) as postNum
+										from post 
+										group by category_id) as p on c.id=p.category_id 
+			where c.blog_id = #{id} 
+			order by id desc
 		]]>
 	</select>
 	
@@ -33,4 +38,9 @@
 			select id, name, description, blog_id as blogId from category where id = #{categoryId}
 		]]>
 	</select>
+	<delete id="deleteById" parameterType="long">
+		<![CDATA[
+			delete from category where id=#{id}
+		]]>
+	</delete>
 </mapper>

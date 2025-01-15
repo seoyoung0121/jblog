@@ -26,4 +26,12 @@ private SqlSession sqlSession;
 	public List<PostVo> getPostByCategoryId(Long categoryId) {
 		return sqlSession.selectList("post.findByCategoryId", categoryId);
 	}
+
+	public void deleteByCategoryId(Long id) {
+		sqlSession.delete("post.deleteByCategoryId", id);
+	}
+
+	public void insertPost(PostVo postVo) {
+		sqlSession.insert("post.insert", postVo);
+	}
 }

@@ -30,4 +30,12 @@ public class CategoryRepository {
 	public CategoryVo findById(Long categoryId) {
 		return sqlSession.selectOne("category.findById", categoryId);
 	}
+
+	public void insert(CategoryVo categoryvo) {
+		sqlSession.insert("category.insert", categoryvo);
+	}
+
+	public void deleteById(Long id) {
+		sqlSession.delete("category.deleteById", id);
+	}
 }

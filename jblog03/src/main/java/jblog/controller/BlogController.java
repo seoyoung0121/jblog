@@ -16,6 +16,7 @@ import jblog.service.CategoryService;
 import jblog.service.PostService;
 import jblog.vo.BlogVo;
 import jblog.vo.CategoryVo;
+import jblog.vo.PostVo;
 import jblog.service.FileUploadService;
 
 @RequestMapping("/{id:(?!assets).*}")
@@ -42,20 +43,18 @@ public class BlogController {
 		if(path2.isPresent()) {
 			postId=path2.get();
 			categoryId=path1.get();
-			
 		} else if(path1.isPresent()) {
 			categoryId=path1.get();
-		} else {
-			CategoryVo categoryVo=categoryService.getCategoryById(id, categoryId);
-			model.addAttribute("categoryVo", categoryVo);
-			if(categoryVo!=null) {
-				model.addAttribute("postVo", postService.getPostById(categoryVo.getId(), postId));
-				model.addAttribute("postVoList", postService.getPostByCategoryId(categoryVo.getId()));
-			}
-			model.addAttribute("blogVo", blogService.getBlogById(id));
-			model.addAttribute("categoryVoList", categoryService.getCategoryByBlogId(id));
-			return "blog/main";
 		}
+		
+		CategoryVo categoryVo=categoryService.getCategoryById(id, categoryId);
+		model.addAttribute("categoryVo", categoryVo);
+		if(categoryVo!=null) {
+			model.addAttribute("postVo", postService.getPostById(categoryVo.getId(), postId));
+			model.addAttribute("postVoList", postService.getPostByCategoryId(categoryVo.getId()));
+		}
+		model.addAttribute("blogVo", blogService.getBlogById(id));
+		model.addAttribute("categoryVoList", categoryService.getCategoryByBlogId(id));
 		
 		return "blog/main";
 	}
@@ -81,15 +80,41 @@ public class BlogController {
 	}
 	
 	@Auth
-	@RequestMapping("/admin/category")
-	public String category() {
+	@RequestMapping(value="/admin/category", method=RequestMethod.GET)
+	public String category(@PathVariable("id") String id, Model model) {
+		model.addAttribute("categoryVoList", categoryService.getCategoryByBlogId(id));
+		model.addAttribute("blogVo", blogService.getBlogById(id));
 		return "blog/admin-category";
 	}
 	
 	@Auth
-	@RequestMapping("/admin/write")
-	public String write() {
+	@RequestMapping(value="/admin/category", method=RequestMethod.POST)
+	public String categoryPost(@PathVariable("id") String id, CategoryVo categoryVo) {
+		categoryVo.setBlogId(id);
+		categoryService.createCategory(categoryVo);
+		return "redirect:/"+id+"/admin/category";
+	}
+	
+	@Auth
+	@RequestMapping(value="/admin/write", method=RequestMethod.GET)
+	public String write(@PathVariable("id") String id, Model model) {
+		model.addAttribute("blogVo", blogService.getBlogById(id));
+		model.addAttribute("categoryVoList", categoryService.getCategoryByBlogId(id));
 		return "blog/admin-write";
 	}
 	
+	@Auth
+	@RequestMapping(value="/admin/write", method=RequestMethod.POST)
+	public String write(@PathVariable("id") String id, PostVo postVo) {
+		
+		postService.insertPost(postVo);
+		return "redirect:/"+id;
+	}
+	
+	@Auth
+	@RequestMapping("/admin/category/delete")
+	public String deleteCategory(@PathVariable("id") String id, @RequestParam("id") Long categoryId) {
+		categoryService.delete(categoryId);
+		return "redirect:/"+id+"/admin/category";
+	}
 }

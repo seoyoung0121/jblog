@@ -28,4 +28,8 @@ public class PostService {
 	public List<PostVo> getPostByCategoryId(Long categoryId) {
 		return postRepository.getPostByCategoryId(categoryId);
 	}
+
+	public void insertPost(PostVo postVo) {
+		postRepository.insertPost(postVo);
+	}
 }

@@ -4,8 +4,18 @@ public class CategoryVo {
 	private Long id;
 	private String name;
 	private String description;
-	private String blog_id;
+	private String blogId;
+	private String postNum;
 	
+	public String getPostNum() {
+		return postNum;
+	}
+	public void setPostNum(String postNum) {
+		this.postNum = postNum;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public long getId() {
 		return id;
 	}
@@ -24,16 +34,18 @@ public class CategoryVo {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getBlog_id() {
-		return blog_id;
+	public String getBlogId() {
+		return blogId;
 	}
-	public void setBlog_id(String blog_id) {
-		this.blog_id = blog_id;
+	public void setBlogId(String blogId) {
+		this.blogId = blogId;
 	}
 	
 	@Override
 	public String toString() {
-		return "CategoryVo [id=" + id + ", name=" + name + ", description=" + description + ", blog_id=" + blog_id
-				+ "]";
+		return "CategoryVo [id=" + id + ", name=" + name + ", description=" + description + ", blogId=" + blogId
+				+ ", postNum=" + postNum + "]";
 	}
+	
+	
 }

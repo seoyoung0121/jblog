@@ -5,18 +5,25 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import jblog.repository.CategoryRepository;
+import jblog.repository.PostRepository;
 import jblog.vo.CategoryVo;
 
 @Service
 public class CategoryService {
 	private CategoryRepository categoryRepository;
+	private PostRepository postRepository;
 	
-	public CategoryService(CategoryRepository categoryRepository) {
+	public CategoryService(CategoryRepository categoryRepository, PostRepository postRepository) {
 		this.categoryRepository=categoryRepository;
+		this.postRepository=postRepository;
 	}
 
 	public void createCategory(String id) {
 		categoryRepository.initialInsert(id);
+	}
+	
+	public void createCategory(CategoryVo categoryvo) {
+		categoryRepository.insert(categoryvo);
 	}
 
 	public List<CategoryVo> getCategoryByBlogId(String id) {
@@ -31,5 +38,10 @@ public class CategoryService {
 			}
 		}
 		return categoryRepository.findById(categoryId);
+	}
+
+	public void delete(Long id) {
+		postRepository.deleteByCategoryId(id);
+		categoryRepository.deleteById(id);
 	}
 }
