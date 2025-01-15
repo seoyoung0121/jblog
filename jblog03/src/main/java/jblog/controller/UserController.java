@@ -1,6 +1,7 @@
 package jblog.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,6 +28,7 @@ public class UserController {
 		return "user/join";
 	}
 	
+	@Transactional
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(UserVo userVo) {
 		userService.join(userVo);

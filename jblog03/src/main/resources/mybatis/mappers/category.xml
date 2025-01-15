@@ -16,12 +16,11 @@
 	
 	<select id="findByBlogId" parameterType="string" resultType="categoryvo">
 		<![CDATA[
-			select c.id, c.name, c.description, c.blog_id as blogId, p.postNum
-			from category as c left join (select category_id, count(*) as postNum
-										from post 
-										group by category_id) as p on c.id=p.category_id 
+			select c.id, c.name, c.description, c.blog_id as blogId, count(p.id) as postNum
+			from category as c left join post as p on c.id=p.category_id 
 			where c.blog_id = #{id} 
-			order by id desc
+			group by c.id
+			order by c.id desc
 		]]>
 	</select>
 	

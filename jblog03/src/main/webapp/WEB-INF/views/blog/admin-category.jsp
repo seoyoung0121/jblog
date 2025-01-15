@@ -32,7 +32,7 @@
 		      			<tr>
 							<td>${count-status.index}</td>
 							<td>${vo.name}</td>
-							<td>${vo.postNum==null?0:vo.postNum}</td>
+							<td>${vo.postNum}</td>
 							<td>${vo.description}</td>
 							<td><a href="${pageContext.request.contextPath}/${blogVo.blogId}/admin/category/delete?id=${vo.id}">
 								<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">

@@ -3,7 +3,6 @@ package jblog.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
 import jblog.repository.CategoryRepository;
 import jblog.repository.PostRepository;
 import jblog.vo.CategoryVo;
@@ -41,7 +40,6 @@ public class CategoryService {
 	}
 
 	public void delete(Long id) {
-		postRepository.deleteByCategoryId(id);
 		categoryRepository.deleteById(id);
 	}
 }

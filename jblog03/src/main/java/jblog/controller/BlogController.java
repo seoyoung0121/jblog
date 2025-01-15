@@ -3,6 +3,7 @@ package jblog.controller;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,8 +113,10 @@ public class BlogController {
 	}
 	
 	@Auth
+	@Transactional
 	@RequestMapping("/admin/category/delete")
 	public String deleteCategory(@PathVariable("id") String id, @RequestParam("id") Long categoryId) {
+		postService.deleteByCategoryId(categoryId);
 		categoryService.delete(categoryId);
 		return "redirect:/"+id+"/admin/category";
 	}

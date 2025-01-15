@@ -14,7 +14,7 @@ public class PostService {
 	public PostService(PostRepository postRepository) {
 		this.postRepository=postRepository;
 	}
-
+	
 	public PostVo getPostById(Long categoryId, Long postId) {
 		if(postId==0L) {
 			postId=postRepository.findDefaultId(categoryId);
@@ -31,5 +31,9 @@ public class PostService {
 
 	public void insertPost(PostVo postVo) {
 		postRepository.insertPost(postVo);
+	}
+
+	public void deleteByCategoryId(Long id) {
+		postRepository.deleteByCategoryId(id);
 	}
 }
