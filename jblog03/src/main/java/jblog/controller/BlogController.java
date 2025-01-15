@@ -54,7 +54,6 @@ public class BlogController {
 			model.addAttribute("postVo", postService.getPostById(categoryVo.getId(), postId));
 			model.addAttribute("postVoList", postService.getPostByCategoryId(categoryVo.getId()));
 		}
-		model.addAttribute("blogVo", blogService.getBlogById(id));
 		model.addAttribute("categoryVoList", categoryService.getCategoryByBlogId(id));
 		
 		return "blog/main";
@@ -63,7 +62,6 @@ public class BlogController {
 	@Auth
 	@RequestMapping(value="/admin", method=RequestMethod.GET)
 	public String admin(@PathVariable("id") String id, Model model) {
-		model.addAttribute("blogVo", blogService.getBlogById(id));
 		return "blog/admin-basic";
 	}
 	
@@ -84,7 +82,6 @@ public class BlogController {
 	@RequestMapping(value="/admin/category", method=RequestMethod.GET)
 	public String category(@PathVariable("id") String id, Model model) {
 		model.addAttribute("categoryVoList", categoryService.getCategoryByBlogId(id));
-		model.addAttribute("blogVo", blogService.getBlogById(id));
 		return "blog/admin-category";
 	}
 	
@@ -99,7 +96,6 @@ public class BlogController {
 	@Auth
 	@RequestMapping(value="/admin/write", method=RequestMethod.GET)
 	public String write(@PathVariable("id") String id, Model model) {
-		model.addAttribute("blogVo", blogService.getBlogById(id));
 		model.addAttribute("categoryVoList", categoryService.getCategoryByBlogId(id));
 		return "blog/admin-write";
 	}
