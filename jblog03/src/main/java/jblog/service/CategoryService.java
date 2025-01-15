@@ -10,11 +10,9 @@ import jblog.vo.CategoryVo;
 @Service
 public class CategoryService {
 	private CategoryRepository categoryRepository;
-	private PostRepository postRepository;
 	
-	public CategoryService(CategoryRepository categoryRepository, PostRepository postRepository) {
+	public CategoryService(CategoryRepository categoryRepository) {
 		this.categoryRepository=categoryRepository;
-		this.postRepository=postRepository;
 	}
 
 	public void createCategory(String id) {
