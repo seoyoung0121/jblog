@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import jblog.repository.CategoryRepository;
-import jblog.repository.PostRepository;
 import jblog.vo.CategoryVo;
 
 @Service

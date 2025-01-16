@@ -6,6 +6,11 @@
 		<![CDATA[
 		insert into post values(null, #{title}, #{contents}, now(), #{categoryId})
 		]]>
+		<selectKey keyProperty="id" resultType="long" order="AFTER">
+			<![CDATA[
+				select last_insert_id() from dual
+			]]>
+		</selectKey>
 	</insert>
 	
 	<select id="findDefaultId" parameterType="long" resultType="long">

@@ -33,7 +33,12 @@
 
 		<div id="extra">
 			<div class="blog-logo">
-				<img id="profile" src="${pageContext.request.contextPath}${blogVo.profile}">
+				<c:if test="${blogVo.profile != '기본 프로필'}">
+					<img id="profile" src="${pageContext.request.contextPath}${blogVo.profile}">
+				</c:if>
+				<c:if test="${blogVo.profile=='기본 프로필'}">
+					<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+				</c:if>
 			</div>
 		</div>
 

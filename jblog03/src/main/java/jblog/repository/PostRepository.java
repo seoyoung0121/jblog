@@ -31,7 +31,7 @@ private SqlSession sqlSession;
 		sqlSession.delete("post.deleteByCategoryId", id);
 	}
 
-	public void insertPost(PostVo postVo) {
-		sqlSession.insert("post.insert", postVo);
+	public int insertPost(PostVo postVo) {
+		return sqlSession.insert("post.insert", postVo);
 	}
 }
