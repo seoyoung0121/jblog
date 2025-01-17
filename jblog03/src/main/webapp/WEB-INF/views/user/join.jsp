@@ -8,6 +8,40 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<script src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+<script>
+	$(function(){
+		var el = $("#btn-checkemail");
+		el.click(function(){
+			var id = $("#blog-id").val();
+			if(id==""){
+				return;
+			}
+			$.ajax({
+				url: "${pageContext.request.contextPath}/api/user/checkId?id="+id,
+				type: "get",
+				dataType: "json",
+				success: function(response){
+					if(response.result!="success"){
+						console.error(response.message);
+						return;
+					}
+					if(response.data.exist){
+						alert("이메일이 존재합니다. 다른 이메일을 사용해 주세요.");
+						$("#blog-id").val("");
+						$("#blog-id").focus();
+						return;
+					}
+					$("#img-checkemail").show();
+					$("#btn-checkemail").hide();
+				},
+				error: function(xhr, status, err){
+					console.error(err);				
+				}
+			});
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="center-content">

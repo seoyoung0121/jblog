@@ -32,4 +32,8 @@ public class UserService {
 		return userRepository.findByIdAndPassword(id, password);
 	}
 	
+	public UserVo getUser(String id) {
+		return userRepository.findById(id);
+	}
+	
 }
